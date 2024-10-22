@@ -86,9 +86,10 @@ jobs:
                https://api.github.com/repos/${{ github.repository }}
           
       - name: Push changes
-        uses: ampere-solution/llvm-project@main
+        uses: ampere-solution/llvm-project@master
         with:
-          branch: ${{ github.head_ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
       #  with:
