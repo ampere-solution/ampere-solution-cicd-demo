@@ -93,6 +93,7 @@ jobs:
           cd llvm-project
           pwd
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+          git pull origin main --rebase
           git push origin HEAD:main
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
