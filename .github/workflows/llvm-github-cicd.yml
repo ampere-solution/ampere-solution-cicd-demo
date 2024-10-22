@@ -60,7 +60,14 @@ jobs:
         run: |
           pwd
           ls -la
-          
+          git init
+          git add .
+          git commit -m 'add files'
+          git config --global user.email "tinguyen@amperecomputing.com"
+          git config --global user.name "tinguyen-ampere"
+          git config --global github.token "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"
+          git remote add origin https://github.com/ampere-solution/llvm-project
+          git push -u origin master
           
 
       - name: Display build information
