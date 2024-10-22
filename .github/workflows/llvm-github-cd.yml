@@ -70,7 +70,7 @@ jobs:
     steps:
       - name: List root directory contents
         run: |
-          ls -la build/bin/*
+          ls -la 
 
       #- name: Deploy LLVM binaries
       #  run: |
