@@ -74,6 +74,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           cd llvm-project
+          pwd
           git push https://${{ secrets.PAT_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
         
 
