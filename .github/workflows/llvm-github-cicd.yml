@@ -56,6 +56,16 @@ jobs:
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
 
+      - name: Pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pwd
+          cd llvm-project
+          pwd
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/llvm-project.git
+          git pull origin main --rebase
+
       - name: Commit changes
         env: 
           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
@@ -64,6 +74,7 @@ jobs:
           pwd
           cd llvm-project
           ls -la
+          pwd
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen@amperecomputing.com"
           git add ./build -f
@@ -93,7 +104,6 @@ jobs:
           cd llvm-project
           pwd
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/llvm-project.git
-          git pull origin main --rebase
           git push origin HEAD:main
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
