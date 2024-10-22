@@ -56,19 +56,25 @@ jobs:
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
 
-      - name: Push to my github llvm-project
+      - name: Commit changes
         env: 
           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
           CI_COMMIT_AUTHOR: tinguyen-ampere
         run: |
           pwd
-          cd llvm-project/build
+          cd llvm-project
           ls -la
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen-ampere@@users.noreply.github.com"
+          git add .
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
-          git push 
-          
+
+      - name: Push changes
+        env: 
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git push https://${{ secrets.PAT_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
+        
 
       - name: Display build information
         run: |
