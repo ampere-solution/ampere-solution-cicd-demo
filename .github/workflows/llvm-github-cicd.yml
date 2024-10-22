@@ -24,7 +24,6 @@ jobs:
           uname -a
           lsb_release -a || cat /etc/os-release
           lscpu
-          
       
       - name: Checkout LLVM source code
         uses: actions/checkout@v4
@@ -56,6 +55,10 @@ jobs:
           ninja
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
+
+      - name: Push to github llvm-project
+        run: |
+          pwd
           
 
       - name: Display build information
