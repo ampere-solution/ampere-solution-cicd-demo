@@ -62,6 +62,7 @@ jobs:
           CI_COMMIT_AUTHOR: tinguyen-ampere
         run: |
           pwd
+          cd llvm-project
           ls -la
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen-ampere@@users.noreply.github.com"
