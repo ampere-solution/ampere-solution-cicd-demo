@@ -54,7 +54,7 @@ jobs:
           pwd
           cd llvm-project/build
           ninja
-          sudo apt install openssh-client
+          sudo apt install openssh-client -y 
           scp ./build/bin/* ampere@192.168.10.10:/home/ampere/deployment
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
