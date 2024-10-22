@@ -60,21 +60,21 @@ jobs:
       #  run: |
       #    echo "Architecture: ${{ matrix.arch }}"
       #    echo "Build completed on $(date)"
-deploy:
-  needs: LLVM_build
-  strategy:
-    matrix:
-      arch: [arm64]
-  runs-on: arc-runner-set-ampere
+  deploy:
+    needs: LLVM_build
+    strategy:
+      matrix:
+        arch: [arm64]
+    runs-on: arc-runner-set-ampere
 
-  steps:
-    - name: List root directory contents
-      run: |
-        ls -la
+    steps:
+      - name: List root directory contents
+        run: |
+          ls -la
 
-    - name: Deploy LLVM binaries
-      run: |
-        scp -r build/bin/* ampere@192.168.10.10:/home/ampere/deployment
+      - name: Deploy LLVM binaries
+        run: |
+          scp -r build/bin/* ampere@192.168.10.10:/home/ampere/deployment
 
 
 
