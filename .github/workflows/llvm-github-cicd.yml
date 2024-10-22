@@ -71,10 +71,10 @@ jobs:
 
       - name: Push changes
         env: 
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN_L2 }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN_L }}
         run: |
           cd llvm-project
-          git push https://${{ secrets.PAT_TOKEN_L2 }}@github.com/ampere-solution/llvm-project.git HEAD:main
+          git push https://${{ secrets.PAT_TOKEN_L }}@github.com/ampere-solution/llvm-project.git HEAD:main
         
 
       - name: Display build information
