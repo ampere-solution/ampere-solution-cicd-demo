@@ -69,13 +69,17 @@ jobs:
           git add ./build -f
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
 
+      # - name: Push changes
+      #   env: 
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     cd llvm-project
+      #     git push https://${{ secrets.GITHUB_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
+      #     shell: bash
       - name: Push changes
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd llvm-project
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
-          shell: bash
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.head_ref }}
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
       #  with:
