@@ -77,7 +77,7 @@ jobs:
       #     git push https://${{ secrets.GITHUB_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
       #     shell: bash
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ampere-solution/llvm-project@master
         with:
           branch: ${{ github.head_ref }}
       #- name: Push changes
