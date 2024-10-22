@@ -28,7 +28,7 @@ jobs:
       - name: Checkout LLVM source code
         uses: actions/checkout@v4
         with:
-          repository: llvm/llvm-project
+          repository: ampere-solution/llvm-project
           path: llvm-project
 
       - name: Set up build environment
@@ -89,7 +89,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          repository: llvm/llvm-project
+          repository: ampere-solution/llvm-project
           path: llvm-project
 
       - name: List repository contents
@@ -124,6 +124,7 @@ jobs:
         run: |
           pwd
           ls -la
+          cd llvm-project/build
           ninja install
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
