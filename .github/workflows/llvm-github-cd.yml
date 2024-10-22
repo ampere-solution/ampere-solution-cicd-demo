@@ -56,6 +56,10 @@ jobs:
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
 
+      - name: list repository contents
+        run: |
+          ls -la ./bin
+
       - name: Display build information
         run: |
           echo "Architecture: ${{ matrix.arch }}"
