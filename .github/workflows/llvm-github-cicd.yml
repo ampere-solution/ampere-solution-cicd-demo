@@ -123,6 +123,7 @@ jobs:
       - name: install LLVM
         run: |
           pwd
+          ls -la
           ninja install
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
