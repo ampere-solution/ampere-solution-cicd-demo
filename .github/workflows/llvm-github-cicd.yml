@@ -56,18 +56,18 @@ jobs:
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
 
-      - name: Push to github llvm-project
-        run: |
-          pwd
-          ls -la
-          git init
-          git add .
-          git commit -m 'add files'
-          git config --global user.email "tinguyen@amperecomputing.com"
-          git config --global user.name "tinguyen-ampere"
-         
-          git remote add origin https://github.com/ampere-solution/llvm-project
-          git push -u origin master
+      #- name: Push to github llvm-project
+      #  run: |
+      #    pwd
+      #    ls -la
+      #    git init
+      #    git add .
+      #    git commit -m 'add files'
+      #    git config --global user.email "tinguyen@amperecomputing.com"
+      #    git config --global user.name "tinguyen-ampere"
+      #   
+      #    git remote add origin https://github.com/ampere-solution/llvm-project
+      #    git push -u origin master
           
 
       - name: Display build information
@@ -96,6 +96,33 @@ jobs:
         run: |
           pwd
           ls -la $GITHUB_WORKSPACE
+      - name: Set up build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build python3
+
+      - name: Configure LLVM build
+        run: |
+          mkdir -p llvm-project/build
+          cd llvm-project/build
+          cmake -G Ninja \
+            -DLLVM_ENABLE_PROJECTS="clang" \
+             -DLLVM_ENABLE_RUNTIMES="libunwind;libcxx;libcxxabi" \
+            -DLLVM_TARGETS_TO_BUILD="AArch64;X86" \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DLLVM_ENABLE_ASSERTIONS=ON \
+            ../llvm
+
+      - name: Build LLVM
+        run: |
+          pwd
+          cd llvm-project/build
+          ninja
+        env:
+          LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
+      #- name: install LLVM
+      #  run: | 
+          
           
 
       
