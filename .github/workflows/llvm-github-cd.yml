@@ -74,6 +74,8 @@ jobs:
 
       - name: Deploy LLVM binaries
         run: |
+          sudo apt update -y
+          sudo apt install openssh-client -y
           scp -r build/bin/* ampere@192.168.10.10:/home/ampere/deployment
 
 
