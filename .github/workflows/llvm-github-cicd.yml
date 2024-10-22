@@ -75,10 +75,11 @@ jobs:
       #  run: |
       #    cd llvm-project
       #    git push https://${{ secrets.GITHUB_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
-      - name: Push changes
-        uses: ampere-solution/llvm-project@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
+      #- name: Push changes
+      #  uses: ampere-solution/llvm-project@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
         
         
 
