@@ -123,10 +123,13 @@ jobs:
       - name: install LLVM
         run: |
           pwd
-          
-          
+          sudo ninja install
 
-      
+      - name: Verify the installation
+        run: |
+          clang --version
+          llvm-config --version
+          
 
       #- name: Deploy LLVM binaries
       #  run: |
