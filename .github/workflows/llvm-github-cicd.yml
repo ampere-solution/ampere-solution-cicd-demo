@@ -17,14 +17,15 @@ jobs:
     strategy:
       matrix:
         arch: [arm64]
-    runs-on: ubuntu-latest
-    # ${{ matrix.arch == 'x86' && 'arc-runner-set-x86' || 'arc-runner-set-ampere' }}
+    runs-on: ${{ matrix.arch == 'x86' && 'arc-runner-set-x86' || 'arc-runner-set-ampere' }}
 
     steps:
       - name: Log Operating System Details
         run: |
           echo "Architecture: ${{ matrix.arch }}"
           uname -a
+          ip a
+          curl https://github.com/ampere-solution/llvm-project.git  
           lsb_release -a || cat /etc/os-release
           lscpu
           
