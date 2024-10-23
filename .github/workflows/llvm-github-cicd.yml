@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: LLVM-CI
+name: LLVM-CICD
 
 # Controls when the workflow will run 
 on:
@@ -71,20 +71,24 @@ jobs:
       #    git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
       #    git pull origin main --rebase 
              
-      #- name: Commit changes
-      #  env: 
-      #    CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-      #    CI_COMMIT_AUTHOR: tinguyen-ampere
-      #  run: |
-      #    pwd
-      #    cd llvm-project
-      #    ls -la
-      #    pwd
-      #    git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-      #    git config --global user.email "tinguyen@amperecomputing.com"
-      #    git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
-      #    git add ./build -f
-      #    git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+      - name: Commit changes
+        env: 
+          CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+          CI_COMMIT_AUTHOR: tinguyen-ampere
+          GITHUB_TOKEN: ${{ secrets. }}
+        run: |
+          pwd
+          cd llvm-project
+          ls -la
+          pwd
+          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+          git config --global user.email "tinguyen@amperecomputing.com"
+          git remote add origin https://github.com/ampere-solution/llvm-project.git
+          git branch -M main
+     #     git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
+     #     git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
+     #     git add ./build -f
+     #     git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           
 
       # - name: Push changes
@@ -163,6 +167,7 @@ jobs:
           ninja
         env:
           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
+          
       - name: install LLVM
         run: |
           pwd
