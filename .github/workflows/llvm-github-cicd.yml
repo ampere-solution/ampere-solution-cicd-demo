@@ -84,11 +84,8 @@ jobs:
           pwd
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen@amperecomputing.com"
-          rm -rf ./build
           echo 'Testing... ' >> README.md
-          ls -la
-          cd ..
-          git add ./llvm-project
+          git add ./README.md
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
       
 ############### Push action section ##################################################
