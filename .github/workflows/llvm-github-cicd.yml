@@ -122,7 +122,7 @@ jobs:
       #    branch: ${{ github.ref }}
           
       - name: Push changes
-        uses: ampere-solution/llvm-project@master
+        uses: ampere-solution/llvm-project@main
         with:
           github_token: ${{ secrets.TAP_TOKEN }}
         
