@@ -121,10 +121,10 @@ jobs:
       #    github_token: ${{ secrets.GITHUB_TOKEN }}
       #    branch: ${{ github.ref }}
           
-      - name: Push changes
-        uses: ampere-solution/llvm-project@main
-        with:
-          github_token: ${{ secrets.TAP_TOKEN }}
+      #- name: Push changes
+      #  uses: ampere-solution/llvm-project@main
+      #  with:
+      #    github_token: ${{ secrets.TAP_TOKEN }}
         
   deploy:
     needs: LLVM_build
