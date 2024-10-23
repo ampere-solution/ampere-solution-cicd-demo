@@ -84,17 +84,19 @@ jobs:
           pwd
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen@amperecomputing.com"
-          git add ./build -f
+          rm -rf ./build
+          ls -la
+          git add .
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
       
 ############### Push action section ##################################################
-      #- name: Push changes
-      #  env: 
-      #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      #  run: |
-      #     cd llvm-project
-      #     git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
-      #     shell: bash
+      - name: Push changes
+        env: 
+           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+           cd llvm-project
+           git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
+           shell: bash
 
           
       #- name: Push changes
