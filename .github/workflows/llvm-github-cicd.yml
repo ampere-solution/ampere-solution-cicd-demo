@@ -142,10 +142,6 @@ jobs:
     runs-on: arc-runner-set-ampere
 
     steps:
-      #- name: List root directory contents
-      #  run: |
-      #    pwd
-      #    ls -la 
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -194,12 +190,6 @@ jobs:
           clang --version
           llvm-config --version
           
-
-      #- name: Deploy LLVM binaries
-      #  run: |
-      #    sudo apt update -y
-      #    sudo apt install openssh-client -y
-      #    scp -r build/bin/* ampere@192.168.10.10:/home/ampere/deployment
 
 
 
