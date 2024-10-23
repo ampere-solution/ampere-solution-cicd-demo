@@ -12,6 +12,8 @@ on:
 
 jobs:
   LLVM_build:
+    permissions:
+      contents: write
     strategy:
       matrix:
         arch: [arm64]
@@ -89,8 +91,6 @@ jobs:
           
 
       - name: Push changes
-          permissions:
-            contents: write
         env: 
            PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
