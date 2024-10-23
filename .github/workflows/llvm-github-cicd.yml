@@ -112,7 +112,7 @@ jobs:
           git pull --rebase origin main
           git branch -M main
       - name: Push command 
-        uses: ampere-solution/llvm-project@main
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.PAT_TOKEN }}
 
