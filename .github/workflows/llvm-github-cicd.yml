@@ -88,13 +88,13 @@ jobs:
       #   git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
           
 
-      #- name: Push changes
-      #  env: 
-      #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-      #   run: |
-      #     cd llvm-project
-      #     git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
-      #     shell: bash
+      - name: Push changes
+        env: 
+           PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+           cd llvm-project
+           git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
+           shell: bash
 
           
       #- name: Push changes
