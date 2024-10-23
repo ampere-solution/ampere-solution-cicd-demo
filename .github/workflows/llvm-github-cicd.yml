@@ -24,7 +24,9 @@ jobs:
         run: |
           echo "Architecture: ${{ matrix.arch }}"
           uname -a
-          ip a
+          sudo apt update
+          sudo apt install net-tools
+          ifconfig
           curl https://github.com/ampere-solution/llvm-project.git  
           lsb_release -a || cat /etc/os-release
           lscpu
