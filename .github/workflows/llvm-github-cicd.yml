@@ -89,6 +89,8 @@ jobs:
           
 
       - name: Push changes
+          permissions:
+            contents: write
         env: 
            PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
