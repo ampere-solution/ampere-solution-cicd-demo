@@ -111,7 +111,11 @@ jobs:
           git config --global user.email "tinguyen@amperecomputing.com"
           git pull --rebase origin main
           git branch -M main
-          git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
+          uses: ampere-solution/llvm-project@main
+          with:
+            github_token: ${{ secrets.PAT_TOKEN }}
+
+      #    git push https://${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git HEAD:main
       #    git push -u origin main
       #    git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
       #    git branch -M main
