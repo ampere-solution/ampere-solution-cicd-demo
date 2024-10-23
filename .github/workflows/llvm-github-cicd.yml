@@ -75,7 +75,7 @@ jobs:
         env: 
           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
           CI_COMMIT_AUTHOR: tinguyen-ampere
-          GITHUB_TOKEN: ${{ secrets. }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           pwd
           cd llvm-project
