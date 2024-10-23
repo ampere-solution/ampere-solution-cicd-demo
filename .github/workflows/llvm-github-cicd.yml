@@ -37,43 +37,41 @@ jobs:
       #     repository: llvm/llvm-project
       #     path: llvm-project
 
-      # - name: Set up build environment
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y build-essential cmake ninja-build python3
+       - name: Set up build environment
+         run: |
+           sudo apt-get update
+           sudo apt-get install -y build-essential cmake ninja-build python3
 
-      # - name: Configure LLVM build
-      #   run: |
-      #     mkdir -p llvm-project/build
-      #     cd llvm-project/build
-      #     cmake -G Ninja \
-      #       -DLLVM_ENABLE_PROJECTS="clang" \
-      #        -DLLVM_ENABLE_RUNTIMES="libunwind;libcxx;libcxxabi" \
-      #       -DLLVM_TARGETS_TO_BUILD="AArch64;X86" \
-      #       -DCMAKE_BUILD_TYPE=Release \
-      #       -DLLVM_ENABLE_ASSERTIONS=ON \
-      #       ../llvm
+       - name: Configure LLVM build
+         run: |
+           mkdir -p llvm-project/build
+           cd llvm-project/build
+           cmake -G Ninja \
+             -DLLVM_ENABLE_PROJECTS="clang" \
+              -DLLVM_ENABLE_RUNTIMES="libunwind;libcxx;libcxxabi" \
+             -DLLVM_TARGETS_TO_BUILD="AArch64;X86" \
+             -DCMAKE_BUILD_TYPE=Release \
+             -DLLVM_ENABLE_ASSERTIONS=ON \
+             ../llvm
 
-      # - name: Build LLVM
-      #   run: |
-      #     pwd
-      #     cd llvm-project/build
-      #     ninja
-      #   env:
-      #     LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
+       - name: Build LLVM
+         run: |
+           pwd
+           cd llvm-project/build
+           ninja
+         env:
+           LLVM_PARALLEL_COMPILE_JOBS: ${{ matrix.arch == 'x86' && 8 || 8 }}
 
-      - name: Pull request
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          pwd
-          cd llvm-project
-          pwd
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
-          git pull origin main --rebase 
-          
-          
-
+      #- name: Pull request
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: |
+      #    pwd
+      #    cd llvm-project
+      #    pwd
+      #    git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
+      #    git pull origin main --rebase 
+             
       - name: Commit changes
         env: 
           CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
@@ -83,14 +81,10 @@ jobs:
           cd llvm-project
           ls -la
           pwd
-          cat README.md
-          echo "## Updated Section" >> README.md
-          echo "This is an update to the README file." >> README.md
-          cat README.md
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen@amperecomputing.com"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
-          # git add ./build -f
+          git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
+          git add ./build -f
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           
 
@@ -117,19 +111,17 @@ jobs:
       #     git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
       #     git push origin HEAD:main
 
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+      #- name: Push changes
+      #  uses: ad-m/github-push-action@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    branch: ${{ github.ref }}
           
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
       #  with:
       #    github_token: ${{ secrets.GITHUB_TOKEN }}
         
-        
-
       - name: Display build information
         run: |
           echo "Architecture: ${{ matrix.arch }}"
@@ -190,10 +182,3 @@ jobs:
           clang --version
           llvm-config --version
           
-
-
-
-
-
-
-      
