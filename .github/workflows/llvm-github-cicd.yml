@@ -88,7 +88,7 @@ jobs:
           echo 'Testing... ' >> README.md
           ls -la
           cd ..
-          git add ./llvm
+          git add ./llvm-project
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
       
 ############### Push action section ##################################################
