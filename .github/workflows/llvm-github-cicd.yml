@@ -105,31 +105,17 @@ jobs:
           
       # - name: Push changes
       #   env:
-      #     PAT_TOKEN: ${{ secrets.PAT_TOKEN_L }}
+      #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
       #     CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-      #     CI_COMMIT_AUTHOR: lgu-ampere
+      #     CI_COMMIT_AUTHOR: tinguyen-ampere
       #   run: |
       #     pwd
       #     cd llvm-project
       #     pwd
       #     git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-      #     git config --global user.email "lgu@amperecomputing.com"
+      #     git config --global user.email "tinguyen@amperecomputing.com"
       #     git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
       #     git push origin HEAD:main
-
-      - name: Push changes
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-          CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-          CI_COMMIT_AUTHOR: tinguyen-ampere
-        run: |
-          pwd
-          cd llvm-project
-          pwd
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "tinguyen@amperecomputing.com"
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
-          git push --force
 
       - name: Push changes
         uses: ad-m/github-push-action@master
