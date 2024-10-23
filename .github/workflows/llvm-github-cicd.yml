@@ -84,7 +84,7 @@ jobs:
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "tinguyen@amperecomputing.com"
           git add ./build -f
-      #   git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
       #   git remote add origin https://x-access-token:${GITHUB_TOKEN}@github.com/ampere-solution/llvm-project.git
           
 
