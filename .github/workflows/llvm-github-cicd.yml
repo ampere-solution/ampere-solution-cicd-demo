@@ -85,6 +85,7 @@ jobs:
           git config --global user.email "tinguyen@amperecomputing.com"
           git add ./build -f
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+          git push
 
       # - name: Push changes
       #   env: 
@@ -93,24 +94,18 @@ jobs:
       #     cd llvm-project
       #     git push https://${{ secrets.GITHUB_TOKEN }}@github.com/ampere-solution/llvm-project.git HEAD:main
       #     shell: bash
-      - name: Verify GITHUB_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "Testing GITHUB_TOKEN permissions..."
-          curl -H "Authorization: token $GITHUB_TOKEN" \
-               -H "Accept: application/vnd.github.v3+json" \
-               https://api.github.com/repos/${{ github.repository }}
+
           
-      - name: Push changes
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
-        run: |
-          pwd
-          cd llvm-project
-          pwd
-          git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
-          git push origin HEAD:main
+      # - name: Push changes
+      #   env:
+      #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      #   run: |
+      #     pwd
+      #     cd llvm-project
+      #     pwd
+      #     git remote set-url origin https://x-access-token:${PAT_TOKEN}@github.com/ampere-solution/llvm-project.git
+      #     git push origin HEAD:main
+          
       #- name: Push changes
       #  uses: ampere-solution/llvm-project@master
       #  with:
